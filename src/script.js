@@ -14,13 +14,22 @@ function mouseDirection(e){
   yDir = e.pageY;
 }
 
-let circle = (a, s, d, f) => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
-  ctx.beginPath();
-  ctx.bezierCurveTo(a, s, 200, 100, 200, 20)
-  ctx.stroke()
+let colorBlocks = () => {
+  if(xDir < 38){
+    ctx.clearRect(0,0,xDir,yDir)
+  }
 }
 
-setInterval(() => circle(xDir, yDir), 100)
+let bLine = (lineEnd, lineLength, lineDir, bottomcurve, lineEndDir, lineTopLength) => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  ctx.beginPath();
+  ctx.bezierCurveTo(lineEnd, lineLength, lineDir, bottomcurve, lineEndDir, lineTopLength)
+  ctx.stroke()
+  ctx.fillStyle = 'green'
+  ctx.fillRect(0,0,100, 100)
+  colorBlocks()
+}
+
+setInterval(() => bLine(150, 10, xDir, yDir, 150, 100), 100)
 
 document.addEventListener('mousemove', mouseDirection)
