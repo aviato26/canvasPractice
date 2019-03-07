@@ -6,23 +6,21 @@ canvas.style.width = window.innerWidth;
 canvas.style.height = window.innerHeight;
 let ctx = canvas.getContext('2d');
 
-let x = 100;
-let rest = 200;
-let k = 0.2;
-let f;
-let v = 0;
-let pos;
-let accel;
-let vel = 1;
+let currentPosition = 50;
+let restLength = 150;
+let k = 0.001;
+let force;
+let distance;
+let velocity = 0;
 
 let animation = () => {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
   requestAnimationFrame(animation);
-  f = x - rest;
-  vel += f * -k;
-  x += vel
-  console.log(x)
-  ctx.rect(x ,20,10,10);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(currentPosition, 40, 10, 10);
   ctx.stroke()
+  distance = currentPosition - restLength;
+  force = distance * -k
+  velocity += force
+  currentPosition += velocity
 }
 animation()
