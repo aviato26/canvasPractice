@@ -8,10 +8,11 @@ let ctx = canvas.getContext('2d');
 
 let currentPosition = 50;
 let restLength = 150;
-let k = 0.001;
+let k = 0.1;
 let force;
 let distance;
 let velocity = 0;
+let damp = 0.9
 
 let animation = () => {
   requestAnimationFrame(animation);
@@ -19,8 +20,9 @@ let animation = () => {
   ctx.fillRect(currentPosition, 40, 10, 10);
   ctx.stroke()
   distance = currentPosition - restLength;
-  force = distance * -k
-  velocity += force
-  currentPosition += velocity
+  force = distance * -k;
+  velocity *= damp;
+  velocity += force;
+  currentPosition += velocity;
 }
 animation()
